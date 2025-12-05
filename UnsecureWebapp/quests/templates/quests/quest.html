@@ -1,0 +1,29 @@
+{% autoescape off %}
+<h1>Finite RailRoadinator</h1>
+<p>page: {{quest.id}}</p>
+<h2>{{success}}</h2>
+<h3>{{quest.quest_text}}</h3>
+<h4>What do you do?</h4>
+<form method="POST" action="/quest/{{quest.id}}/nextQuest/">
+    <input type="hidden" name="choice1" value="{{c0.id}}" />
+    <input type="hidden" name="choice2" value="{{c1.id}}" />
+
+    <div>
+    <input type="radio" id="choice1" name="path" value="{{c0.id|safe}}" checked/>
+    <label>{{c0.text}}</label>
+    </div>
+
+    <div>
+    <input type="radio" id="choice2" name="path" value="{{c1.id|safe}}"/>
+    <label>{{c1.text}}</label>
+    </div>
+
+    <div>
+    <input type="radio" id="choice3" name="path" value="CUSTOM"/>
+    <input type="text" size="20" name="CustomChoice" />
+    </div>
+
+    {%csrf_token%}
+    <input type="submit" value="Attempt thine future">
+</form>
+{% endautoescape %}
