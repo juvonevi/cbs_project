@@ -64,6 +64,9 @@ def nextQuest(request, quest_id):
 
 
 def quest(request, quest_id):
+    if not request.user.is_authenticated:
+        return render(request, 'error.html', {'message':'<p>Please log in first</p><a href=\'/sign/\'>here</a>'})
+
     uProgress = get_object_or_404(UserProgress, user=request.user)
     quest_id = uProgress.page
     return questLoader(request, quest_id, "")
@@ -75,7 +78,7 @@ def questLoader(request, quest_id, success):
     
     uProgress = get_object_or_404(UserProgress, user=request.user)
     if quest_id != uProgress.page:
-        return render(request, 'error.html', {'message':'Thee \'re not supposed to be here'})
+        return render(request, 'error.html', {'message':'<p>Thee \'re not supposed to be here</p>'})
 
     quest = get_object_or_404(Quest, id=quest_id)
     choices = get_list_or_404(Choice, quest=quest_id)
