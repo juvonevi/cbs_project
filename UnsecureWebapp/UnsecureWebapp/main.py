@@ -24,4 +24,3 @@ def log_in(request):
 
 def index(request):
     return render(request, 'main.html')
-    #return HttpResponse("Hello world!")

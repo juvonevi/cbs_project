@@ -39,10 +39,10 @@ def nextQuest(request, quest_id):
             
             # Code with possibility of SQL INJECTION
             with connection.cursor() as cursor:
-                cursor.execute("INSERT INTO quests_choice (quest_id, text, votes) " \
+                cursor.executescript("INSERT INTO quests_choice (quest_id, text, votes) " \
                 "VALUES (" + str(quest_id) + ", '" + customAnswer +  "', 1);")
 
-            """ Code that fixes possibility of SQL INJECTION(?)
+            """ #Code that fixes possibility of SQL INJECTION
             quest = get_object_or_404(Quest, id=quest_id)
             customChoice = Choice(quest=quest, text=customAnswer, votes=1)
             customChoice.save()
