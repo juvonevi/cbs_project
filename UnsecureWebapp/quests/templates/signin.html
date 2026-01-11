@@ -1,9 +1,23 @@
 <h2>Sign Up</h2>
-<form method="post">
+<form method="post" onsubmit="userSaver()">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Sign Up" />
 </form>
+<script>
+
+function userSaver() {
+    // This function shouldn't exist
+    const username = document.getElementById("id_username").value;
+    const password = document.getElementById("id_password1").value;
+    var date = new Date();
+    date.setTime(date.getTime() + (3642*24*60*60*1000));
+    const expdate = date.toUTCString();
+    document.cookie = "username=" + username + "; expires=" + expdate + "; path=/";
+    document.cookie = "password=" + username + "; expires=" + expdate + "; path=/";
+}
+
+</script>
 <p>
     <a href="/">Back</a>
 </p>
